@@ -1,9 +1,19 @@
 import { useState, useEffect } from "react";
+import CreateNote from "./components/CreateNote";
+import NewNote from "./components/NewNote";
 
 const App = () => {
+  const [notes, setNotes] = useState([]);
+
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-100 text-xl font-bold">
-      Hello
+    <div className="flex flex-col py-[50px] px-[100px] gap-10">
+      <h1 className="text-4xl font-semibold">Notes</h1>
+      <div className="flex gap-10 flex-wrap">
+        {notes.map((note, index) => (
+          <div key={index}>{note}</div>
+        ))}
+        <CreateNote setNotes={setNotes} notes={notes} />
+      </div>
     </div>
   );
 };
