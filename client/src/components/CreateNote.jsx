@@ -1,12 +1,26 @@
 import { Plus } from "lucide-react";
 import Note from "./Note";
 
+const noteColors = [
+  "bg-yellow-100 text-yellow-800",
+  "bg-blue-100 text-blue-800",
+  "bg-green-100 text-green-800",
+  "bg-pink-100 text-pink-800",
+  "bg-purple-100 text-purple-800",
+  "bg-gray-100 text-gray-800",
+];
+
+const randomColor = () => {
+  return noteColors[Math.floor(Math.random() * noteColors.length)];
+};
+
 const CreateNote = ({ fetchNotes }) => {
   async function handleClick() {
     try {
       const res = await fetch("http://localhost:5000/api/notes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ color: randomColor() }),
       });
 
       if (!res.ok) throw new Error("Failed to add note");

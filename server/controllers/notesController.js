@@ -16,6 +16,7 @@ const createNote = (req, res) => {
   const note = {
     id: notes.length + 1,
     text: "",
+    color: req.body.color || "bg-yellow-100 text-yellow-800",
   };
   notes.push(note);
   res.status(201).json(notes);
