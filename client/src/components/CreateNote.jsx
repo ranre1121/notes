@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import Note from "./Note";
+import { useState } from "react";
 
 const noteColors = [
   "bg-yellow-100 text-yellow-800",
@@ -14,7 +14,7 @@ const randomColor = () => {
   return noteColors[Math.floor(Math.random() * noteColors.length)];
 };
 
-const CreateNote = ({ fetchNotes }) => {
+const CreateNote = ({ fetchNotes, setLatestNoteId }) => {
   async function handleClick() {
     try {
       const res = await fetch("http://localhost:5000/api/notes", {
@@ -24,6 +24,9 @@ const CreateNote = ({ fetchNotes }) => {
       });
 
       if (!res.ok) throw new Error("Failed to add note");
+
+      const newNote = await res.json();
+      setLatestNoteId(newNote.id);
 
       fetchNotes();
     } catch (error) {

@@ -3,6 +3,7 @@ import {
   getNotes,
   createNote,
   updateNote,
+  deleteNote,
 } from "../controllers/notesController.js";
 const router = express.Router();
 
@@ -14,5 +15,8 @@ router.post("/", createNote);
 
 //update
 router.put("/:id", updateNote);
+
+//delete
+router.delete("/:id", deleteNote);
 
 export default router;

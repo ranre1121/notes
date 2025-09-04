@@ -14,12 +14,12 @@ const getNotes = (req, res) => {
 //POST /api/notes
 const createNote = (req, res) => {
   const note = {
-    id: notes.length + 1,
+    id: notes.length > 0 ? notes[notes.length - 1].id + 1 : 1,
     text: "",
     color: req.body.color || "bg-yellow-100 text-yellow-800",
   };
   notes.push(note);
-  res.status(201).json(notes);
+  res.status(201).json(note);
 };
 
 //change a note
@@ -38,4 +38,19 @@ const updateNote = (req, res) => {
   res.status(200).json(notes);
 };
 
-export { getNotes, createNote, updateNote };
+//delete a note
+//DELETE /api/notes/:id
+const deleteNote = (req, res) => {
+  const id = parseInt(req.params.id);
+  const note = notes.find((note) => note.id === id);
+  if (!note) {
+    const error = new Error(`A note with the id of ${id} was not found`);
+    error.status = 404;
+    return next(error);
+  }
+
+  notes = notes.filter((note) => note.id !== id);
+  res.status.json(posts);
+};
+
+export { getNotes, createNote, updateNote, deleteNote };
