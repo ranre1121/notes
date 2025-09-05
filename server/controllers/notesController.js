@@ -17,7 +17,7 @@ const createNote = (req, res) => {
     id: notes.length > 0 ? notes[notes.length - 1].id + 1 : 1,
     text: "",
     color: req.body.color || "bg-yellow-100 text-yellow-800",
-    lastModified: new Date().toLocaleTimeString(),
+    lastModified: new Date().toISOString(),
   };
   notes.push(note);
   res.status(201).json(note);
@@ -34,7 +34,7 @@ const updateNote = (req, res) => {
     error.status = 404;
     return next(error);
   }
-  note.lastModified = new Date().toLocaleTimeString();
+  note.lastModified = new Date().toISOString();
   note.text = req.body.text;
   res.status(200).json(note);
 };

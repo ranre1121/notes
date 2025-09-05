@@ -1,18 +1,68 @@
 import { useRef, useEffect, useState } from "react";
 import { Trash2 } from "lucide-react";
+import { Expand } from "lucide-react";
+import { motion } from "motion/react";
+import { Shrink } from "lucide-react";
+
 const Note = ({ note, isNew, setNotes }) => {
   const textareaRef = useRef(null);
+  const divRef = useRef(null);
   const [textContent, setTextContent] = useState(note.text);
   const [lastModified, setLastModified] = useState(note.lastModified);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [zIndex, setZIndex] = useState(1);
+  const [distanceFromRight, setDistanceFromRight] = useState(0);
+
+  const handleExpand = () => {
+    setZIndex(100); // bring to front immediately
+    setIsExpanded(true);
+  };
+
+  const handleShrink = () => {
+    setIsExpanded(false);
+    // wait until animation finishes before lowering zIndex
+    setTimeout(() => setZIndex(1), 500); // 500ms = your transition duration
+  };
+
+  const measure = () => {
+    if (divRef.current) {
+      const rect = divRef.current.getBoundingClientRect();
+      setDistanceFromRight(window.innerWidth - rect.right);
+    }
+  };
+
+  useEffect(() => {
+    // Initial measure
+    measure();
+
+    // Recalculate on resize
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   {
     /** 
     TODO
-    -Last modified Date
     -Full screen mode
     -color modification
     */
   }
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const today = new Date();
+    const isSameDay =
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate();
+    const pad = (n) => String(n).padStart(2, "0");
+    if (isSameDay) {
+      return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+    } else {
+      return `${pad(date.getDate())}.${pad(date.getMonth()) + 1}`;
+    }
+  };
 
   useEffect(() => {
     if (isNew) {
@@ -57,25 +107,54 @@ const Note = ({ note, isNew, setNotes }) => {
   };
 
   return (
-    <div
-      className={`group cursor-pointer relative flex items-center justify-center size-[250px] rounded-xl p-5.5 ${note.color}`}
-    >
-      <textarea
-        className="w-full h-full resize-none appearance-none cursor-pointer focus:outline-0"
-        ref={textareaRef}
-        onChange={(e) => {
-          const newText = e.target.value;
-          setTextContent(e.target.value);
-          handleChange(newText);
+    <div className="size-[250px] relative">
+      <motion.div
+        ref={divRef}
+        className={`group cursor-pointer border ${
+          distanceFromRight < 350 ? "top-0 right-0" : "top-0 left-0"
+        } flex absolute items-center justify-center size-[250px] rounded-xl p-6.5 ${
+          note.color
+        }`}
+        animate={{
+          width: isExpanded ? "600px" : "250px",
+          height: isExpanded ? "600px" : "250px",
+          zIndex,
         }}
-        value={textContent}
-      />
-      <div className="absolute top-2 right-2 flex items-center text-gray-400">
-        <Trash2 className="hover:text-red-500 size-4" onClick={handleDelete} />
-      </div>
-      <p className="absolute bottom-1.5 left-1.5 text-xs text-gray-400">
-        {lastModified}
-      </p>
+        transition={{ duration: 0.5 }}
+      >
+        <textarea
+          className="w-full h-full resize-none appearance-none cursor-pointer focus:outline-0"
+          ref={textareaRef}
+          onChange={(e) => {
+            const newText = e.target.value;
+            setTextContent(e.target.value);
+            handleChange(newText);
+          }}
+          value={textContent}
+        />
+        <div className="absolute top-2 right-2 gap-1.5 flex items-center text-gray-400">
+          {isExpanded ? (
+            <Shrink
+              onClick={handleShrink}
+              className="hover:text-blue-400 size-4"
+            />
+          ) : (
+            <Expand
+              className="hover:text-blue-400 size-4"
+              onClick={handleExpand}
+            />
+          )}
+
+          <Trash2
+            className="hover:text-red-500 size-4"
+            onClick={handleDelete}
+          />
+        </div>
+        <p className="absolute bottom-1.5 left-1.5 text-xs text-gray-400">
+          {formatDate(lastModified)}
+          <br></br>
+        </p>
+      </motion.div>
     </div>
   );
 };
