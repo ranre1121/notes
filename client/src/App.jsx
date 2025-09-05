@@ -29,10 +29,14 @@ const App = () => {
             note={note}
             key={note.id}
             isNew={note.id === latestNoteId}
-            fetchNotes={fetchNotes}
+            setNotes={setNotes}
           />
         ))}
-        <CreateNote fetchNotes={fetchNotes} setLatestNoteId={setLatestNoteId} />
+        <CreateNote
+          fetchNotes={fetchNotes}
+          setLatestNoteId={setLatestNoteId}
+          setNotes={setNotes}
+        />
       </div>
     </div>
   );

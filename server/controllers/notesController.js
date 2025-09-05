@@ -17,6 +17,7 @@ const createNote = (req, res) => {
     id: notes.length > 0 ? notes[notes.length - 1].id + 1 : 1,
     text: "",
     color: req.body.color || "bg-yellow-100 text-yellow-800",
+    lastModified: new Date().toLocaleTimeString(),
   };
   notes.push(note);
   res.status(201).json(note);
@@ -33,14 +34,14 @@ const updateNote = (req, res) => {
     error.status = 404;
     return next(error);
   }
-
+  note.lastModified = new Date().toLocaleTimeString();
   note.text = req.body.text;
-  res.status(200).json(notes);
+  res.status(200).json(note);
 };
 
 //delete a note
 //DELETE /api/notes/:id
-const deleteNote = (req, res) => {
+const deleteNote = (req, res, next) => {
   const id = parseInt(req.params.id);
   const note = notes.find((note) => note.id === id);
   if (!note) {
@@ -50,7 +51,7 @@ const deleteNote = (req, res) => {
   }
 
   notes = notes.filter((note) => note.id !== id);
-  res.status.json(posts);
+  res.status(202).json(note);
 };
 
 export { getNotes, createNote, updateNote, deleteNote };

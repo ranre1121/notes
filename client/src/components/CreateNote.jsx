@@ -14,7 +14,7 @@ const randomColor = () => {
   return noteColors[Math.floor(Math.random() * noteColors.length)];
 };
 
-const CreateNote = ({ fetchNotes, setLatestNoteId }) => {
+const CreateNote = ({ setNotes, setLatestNoteId }) => {
   async function handleClick() {
     try {
       const res = await fetch("http://localhost:5000/api/notes", {
@@ -27,8 +27,7 @@ const CreateNote = ({ fetchNotes, setLatestNoteId }) => {
 
       const newNote = await res.json();
       setLatestNoteId(newNote.id);
-
-      fetchNotes();
+      setNotes((prev) => [...prev, newNote]);
     } catch (error) {
       console.log(error);
     }
