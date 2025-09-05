@@ -84,7 +84,7 @@ const Note = ({ note, isNew, notes, setNotes }) => {
     if (isSameDay) {
       return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
     } else {
-      return `${pad(date.getDate())}.${pad(date.getMonth()) + 1}`;
+      return `${pad(date.getDate())}.${pad(date.getMonth() + 1)}`;
     }
   };
 
