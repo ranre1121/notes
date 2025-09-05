@@ -11,7 +11,12 @@ const Note = ({ note, isNew, setNotes }) => {
   const [lastModified, setLastModified] = useState(note.lastModified);
   const [isExpanded, setIsExpanded] = useState(false);
   const [zIndex, setZIndex] = useState(1);
-  const [distanceFromRight, setDistanceFromRight] = useState(0);
+  const [distances, setDistances] = useState({
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  });
 
   const handleExpand = () => {
     setZIndex(100); // bring to front immediately
@@ -27,26 +32,46 @@ const Note = ({ note, isNew, setNotes }) => {
   const measure = () => {
     if (divRef.current) {
       const rect = divRef.current.getBoundingClientRect();
-      setDistanceFromRight(window.innerWidth - rect.right);
+      setDistances({
+        top: rect.top,
+        left: rect.left,
+        right: window.innerWidth - rect.right,
+        bottom: window.innerHeight - rect.bottom,
+      });
     }
   };
 
   useEffect(() => {
-    // Initial measure
-    measure();
+    const handleUpdate = () => measure();
 
-    // Recalculate on resize
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    measure(); // initial
+
+    window.addEventListener("resize", handleUpdate);
+    window.addEventListener("scroll", handleUpdate);
+
+    return () => {
+      window.removeEventListener("resize", handleUpdate);
+      window.removeEventListener("scroll", handleUpdate);
+    };
   }, []);
 
   {
     /** 
-    TODO
-    -Full screen mode
-    -color modification
-    */
+      TODO
+      -Full screen mode
+      -color modification
+      */
   }
+
+  const position = () => {
+    if (distances.right < 350 && distances.bottom < 350) {
+      return "right-0 bottom-0";
+    } else if (distances.bottom < 350) {
+      return "bottom-0 left-0";
+    } else if (distances.right < 350) {
+      return "top-0 right-0";
+    }
+  };
 
   const formatDate = (dateString) => {
     if (!dateString) return "";
@@ -110,9 +135,7 @@ const Note = ({ note, isNew, setNotes }) => {
     <div className="size-[250px] relative">
       <motion.div
         ref={divRef}
-        className={`group cursor-pointer border ${
-          distanceFromRight < 350 ? "top-0 right-0" : "top-0 left-0"
-        } flex absolute items-center justify-center size-[250px] rounded-xl p-6.5 ${
+        className={`group cursor-pointer border ${position()} flex absolute items-center justify-center size-[250px] rounded-xl p-6.5 ${
           note.color
         }`}
         animate={{
@@ -152,7 +175,6 @@ const Note = ({ note, isNew, setNotes }) => {
         </div>
         <p className="absolute bottom-1.5 left-1.5 text-xs text-gray-400">
           {formatDate(lastModified)}
-          <br></br>
         </p>
       </motion.div>
     </div>

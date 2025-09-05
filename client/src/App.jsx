@@ -23,7 +23,7 @@ const App = () => {
   return (
     <div className="flex flex-col py-[50px] px-[100px] gap-10">
       <h1 className="text-4xl font-semibold ">Notes</h1>
-      <div className="flex gap-10 flex-wrap">
+      <div className="flex gap-5 flex-wrap">
         {notes.map((note) => (
           <Note
             note={note}
