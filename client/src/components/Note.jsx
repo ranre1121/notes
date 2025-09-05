@@ -4,7 +4,7 @@ import { Expand } from "lucide-react";
 import { motion } from "motion/react";
 import { Shrink } from "lucide-react";
 
-const Note = ({ note, isNew, setNotes }) => {
+const Note = ({ note, isNew, notes, setNotes }) => {
   const textareaRef = useRef(null);
   const divRef = useRef(null);
   const [textContent, setTextContent] = useState(note.text);
@@ -53,12 +53,11 @@ const Note = ({ note, isNew, setNotes }) => {
       window.removeEventListener("resize", handleUpdate);
       window.removeEventListener("scroll", handleUpdate);
     };
-  }, []);
+  }, [notes]);
 
   {
     /** 
       TODO
-      -Full screen mode
       -color modification
       */
   }
