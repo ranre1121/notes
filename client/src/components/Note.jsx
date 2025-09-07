@@ -11,12 +11,29 @@ const Note = ({ note, isNew, notes, setNotes }) => {
   const [lastModified, setLastModified] = useState(note.lastModified);
   const [isExpanded, setIsExpanded] = useState(false);
   const [zIndex, setZIndex] = useState(1);
+  const [position, setPosition] = useState(null);
   const [distances, setDistances] = useState({
     top: 0,
     right: 0,
     bottom: 0,
     left: 0,
   });
+
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const today = new Date();
+    const isSameDay =
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate();
+    const pad = (n) => String(n).padStart(2, "0");
+    if (isSameDay) {
+      return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+    } else {
+      return `${pad(date.getDate())}.${pad(date.getMonth() + 1)}`;
+    }
+  };
 
   const handleExpand = () => {
     setZIndex(100); // bring to front immediately
@@ -40,59 +57,6 @@ const Note = ({ note, isNew, notes, setNotes }) => {
       });
     }
   };
-
-  useEffect(() => {
-    const handleUpdate = () => measure();
-
-    measure(); // initial
-
-    window.addEventListener("resize", handleUpdate);
-    window.addEventListener("scroll", handleUpdate);
-
-    return () => {
-      window.removeEventListener("resize", handleUpdate);
-      window.removeEventListener("scroll", handleUpdate);
-    };
-  }, [notes]);
-
-  {
-    /** 
-      TODO
-      -color modification
-      */
-  }
-
-  const position = () => {
-    if (distances.right < 350 && distances.bottom < 350) {
-      return "right-0 bottom-0";
-    } else if (distances.bottom < 350) {
-      return "bottom-0 left-0";
-    } else if (distances.right < 350) {
-      return "top-0 right-0";
-    }
-  };
-
-  const formatDate = (dateString) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    const today = new Date();
-    const isSameDay =
-      date.getFullYear() === today.getFullYear() &&
-      date.getMonth() === today.getMonth() &&
-      date.getDate() === today.getDate();
-    const pad = (n) => String(n).padStart(2, "0");
-    if (isSameDay) {
-      return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
-    } else {
-      return `${pad(date.getDate())}.${pad(date.getMonth() + 1)}`;
-    }
-  };
-
-  useEffect(() => {
-    if (isNew) {
-      textareaRef.current.focus();
-    }
-  }, []);
 
   //PUT
   const handleChange = async (newText) => {
@@ -130,13 +94,54 @@ const Note = ({ note, isNew, notes, setNotes }) => {
     }
   };
 
+  useEffect(() => {
+    const handleUpdate = () => measure();
+
+    measure(); // initial
+
+    window.addEventListener("resize", handleUpdate);
+    window.addEventListener("scroll", handleUpdate);
+
+    return () => {
+      window.removeEventListener("resize", handleUpdate);
+      window.removeEventListener("scroll", handleUpdate);
+    };
+  }, []);
+
+  {
+    /** 
+      TODO
+      -color modification
+      */
+  }
+
+  const cornerSetter = () => {
+    if (distances.right < 350 && distances.bottom < 350) {
+      return "right-0 bottom-0";
+    } else if (distances.bottom < 350) {
+      return "bottom-0 left-0";
+    } else if (distances.right < 350) {
+      return "top-0 right-0";
+    }
+  };
+
+  useEffect(() => {
+    if (isNew) {
+      textareaRef.current.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isExpanded) return;
+    const corner = cornerSetter();
+    setPosition(corner);
+  }, [isExpanded]);
+
   return (
     <div className="size-[250px] relative">
       <motion.div
         ref={divRef}
-        className={`group cursor-pointer border ${position()} flex absolute size-[250px] rounded-xl py-2 px-2 ${
-          note.color
-        }`}
+        className={`group cursor-pointer border ${position} flex absolute size-[250px] rounded-xl py-2 px-2 ${note.color}`}
         animate={{
           width: isExpanded ? "600px" : "250px",
           height: isExpanded ? "600px" : "250px",

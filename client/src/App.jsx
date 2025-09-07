@@ -23,9 +23,11 @@ const App = () => {
 
   return (
     <div className="flex flex-col py-[50px] px-[100px] gap-5">
-      <h1 className="text-4xl font-semibold ">Notes</h1>
+      <h1 className="text-4xl font-semibold bg-gradient-to-r from-yellow-200 to-yellow-300 w-fit px-1">
+        Notes
+      </h1>
       <div className="flex gap-5 items-center ">
-        <Funnel className="mt-1" />
+        <Funnel />
       </div>
       <div className="flex gap-5 flex-wrap ">
         {notes.map((note) => (
