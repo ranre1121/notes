@@ -4,7 +4,18 @@ import { Expand } from "lucide-react";
 import { motion } from "motion/react";
 import { Shrink } from "lucide-react";
 
-const Note = ({ note, isNew, notes, setNotes }) => {
+{
+  /** 
+  TODO:
+  -filters
+  -color modification
+  -backend save
+  -authorization
+  
+   */
+}
+
+const Note = ({ note, isNew, setNotes }) => {
   const textAreaRef = useRef(null);
   const divRef = useRef(null);
   const titleRef = useRef(null);
@@ -128,9 +139,7 @@ const Note = ({ note, isNew, notes, setNotes }) => {
   };
 
   useEffect(() => {
-    if (isNew) {
-      titleRef.current.focus();
-    }
+    titleRef.current.focus();
   }, []);
 
   useEffect(() => {

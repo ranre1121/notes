@@ -4,10 +4,17 @@ let notes = [];
 //GET /api/notes
 const getNotes = (req, res) => {
   const limit = parseInt(req.query.limit);
+
+  // newest first sort
+  const sortedNotes = [...notes].sort(
+    (a, b) => new Date(b.lastModified) - new Date(a.lastModified)
+  );
+
   if (!isNaN(limit) && limit > 0) {
-    return res.status(200).json(notes.slice(0, limit));
+    return res.status(200).json(sortedNotes.slice(0, limit));
   }
-  res.json(notes);
+
+  res.json(sortedNotes);
 };
 
 //create a note
