@@ -15,7 +15,7 @@ import { Shrink } from "lucide-react";
    */
 }
 
-const Note = ({ note, isNew, setNotes }) => {
+const Note = ({ note, setNotes, focusLatest }) => {
   const textAreaRef = useRef(null);
   const divRef = useRef(null);
   const titleRef = useRef(null);
@@ -139,7 +139,9 @@ const Note = ({ note, isNew, setNotes }) => {
   };
 
   useEffect(() => {
-    titleRef.current.focus();
+    if (focusLatest) {
+      titleRef.current.focus();
+    }
   }, []);
 
   useEffect(() => {

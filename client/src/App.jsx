@@ -21,7 +21,7 @@ const sortingOptions = [
 
 const App = () => {
   const [notes, setNotes] = useState([]);
-  const [latestNoteId, setLatestNoteId] = useState(null);
+  const [focusLatest, setFocusLatest] = useState(false);
   const [showSorting, setShowSorting] = useState(false);
   const [selectedSortingOption, setSelectedSortingOption] = useState("newest");
 
@@ -36,6 +36,7 @@ const App = () => {
   };
 
   const sortNotes = () => {
+    setFocusLatest(false);
     const sorted = [...notes].sort((a, b) =>
       selectedSortingOption === "newest"
         ? new Date(b.lastModified) - new Date(a.lastModified)
@@ -111,13 +112,14 @@ const App = () => {
             fetchNotes={fetchNotes}
             setNotes={setNotes}
             notes={notes}
+            focusLatest={focusLatest}
           />
         ))}
         <div onClick={() => setSelectedSortingOption(null)}>
           <CreateNote
             fetchNotes={fetchNotes}
-            setLatestNoteId={setLatestNoteId}
             setNotes={setNotes}
+            setFocusLatest={setFocusLatest}
           />
         </div>
       </div>
