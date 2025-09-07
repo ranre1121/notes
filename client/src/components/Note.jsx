@@ -97,7 +97,7 @@ const Note = ({ note, isNew, notes, setNotes }) => {
   //PUT
   const handleChange = async (newText) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/notes/${note.id}`, {
+      const res = await fetch(`http://localhost:8000/api/notes/${note.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: newText }),
@@ -116,7 +116,7 @@ const Note = ({ note, isNew, notes, setNotes }) => {
   //DELETE
   const handleDelete = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/notes/${note.id}`, {
+      const res = await fetch(`http://localhost:8000/api/notes/${note.id}`, {
         method: "DELETE",
       });
 
@@ -134,7 +134,7 @@ const Note = ({ note, isNew, notes, setNotes }) => {
     <div className="size-[250px] relative">
       <motion.div
         ref={divRef}
-        className={`group cursor-pointer border ${position()} flex absolute items-center justify-center size-[250px] rounded-xl p-6.5 ${
+        className={`group cursor-pointer border ${position()} flex absolute size-[250px] rounded-xl py-2 px-2 ${
           note.color
         }`}
         animate={{
@@ -144,16 +144,19 @@ const Note = ({ note, isNew, notes, setNotes }) => {
         }}
         transition={{ duration: 0.5 }}
       >
-        <textarea
-          className="w-full h-full resize-none appearance-none cursor-pointer focus:outline-0"
-          ref={textareaRef}
-          onChange={(e) => {
-            const newText = e.target.value;
-            setTextContent(e.target.value);
-            handleChange(newText);
-          }}
-          value={textContent}
-        />
+        <div className="w-full">
+          <p className="font-bold">Title</p>
+          <textarea
+            className="w-full h-full resize-none appearance-none cursor-pointer focus:outline-0"
+            ref={textareaRef}
+            onChange={(e) => {
+              const newText = e.target.value;
+              setTextContent(e.target.value);
+              handleChange(newText);
+            }}
+            value={textContent}
+          />
+        </div>
         <div className="absolute top-2 right-2 gap-1.5 flex items-center text-gray-400">
           {isExpanded ? (
             <Shrink

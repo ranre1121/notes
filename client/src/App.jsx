@@ -9,7 +9,7 @@ const App = () => {
 
   const fetchNotes = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/notes");
+      const res = await fetch("http://localhost:8000/api/notes");
       const json = await res.json();
       setNotes(json);
     } catch (error) {
