@@ -5,9 +5,11 @@ import { motion } from "motion/react";
 import { Shrink } from "lucide-react";
 
 const Note = ({ note, isNew, notes, setNotes }) => {
-  const textareaRef = useRef(null);
+  const textAreaRef = useRef(null);
   const divRef = useRef(null);
-  const [textContent, setTextContent] = useState(note.text);
+  const titleRef = useRef(null);
+  const [textAreaContent, setTextAreaContent] = useState(note.text);
+  const [titleContent, setTitleContent] = useState(note.title);
   const [lastModified, setLastModified] = useState(note.lastModified);
   const [isExpanded, setIsExpanded] = useState(false);
   const [zIndex, setZIndex] = useState(1);
@@ -64,7 +66,7 @@ const Note = ({ note, isNew, notes, setNotes }) => {
       const res = await fetch(`http://localhost:8000/api/notes/${note.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: newText }),
+        body: JSON.stringify({ text: newText, title: titleContent }),
       });
 
       if (!res.ok) {
@@ -116,18 +118,18 @@ const Note = ({ note, isNew, notes, setNotes }) => {
   }
 
   const cornerSetter = () => {
-    if (distances.right < 350 && distances.bottom < 350) {
+    if (distances.right < 330 && distances.bottom < 330) {
       return "right-0 bottom-0";
-    } else if (distances.bottom < 350) {
+    } else if (distances.bottom < 330) {
       return "bottom-0 left-0";
-    } else if (distances.right < 350) {
+    } else if (distances.right < 330) {
       return "top-0 right-0";
     }
   };
 
   useEffect(() => {
     if (isNew) {
-      textareaRef.current.focus();
+      titleRef.current.focus();
     }
   }, []);
 
@@ -150,16 +152,28 @@ const Note = ({ note, isNew, notes, setNotes }) => {
         transition={{ duration: 0.5 }}
       >
         <div className="w-full">
-          <p className="font-bold">Title</p>
-          <textarea
-            className="w-full h-full resize-none appearance-none cursor-pointer focus:outline-0"
-            ref={textareaRef}
+          <input
+            type="text"
+            className="font-bold focus:outline-0"
+            ref={titleRef}
+            placeholder="Title"
             onChange={(e) => {
               const newText = e.target.value;
-              setTextContent(e.target.value);
+              setTitleContent(e.target.value);
               handleChange(newText);
             }}
-            value={textContent}
+            value={titleContent}
+          />
+          <textarea
+            className="w-full h-full resize-none appearance-none cursor-pointer focus:outline-0"
+            placeholder="Note"
+            ref={textAreaRef}
+            onChange={(e) => {
+              const newText = e.target.value;
+              setTextAreaContent(e.target.value);
+              handleChange(newText);
+            }}
+            value={textAreaContent}
           />
         </div>
         <div className="absolute top-2 right-2 gap-1.5 flex items-center text-gray-400">

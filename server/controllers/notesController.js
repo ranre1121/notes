@@ -16,6 +16,7 @@ const createNote = (req, res) => {
   const note = {
     id: notes.length > 0 ? notes[notes.length - 1].id + 1 : 1,
     text: "",
+    title: "",
     color: req.body.color || "bg-yellow-100 text-yellow-800",
     lastModified: new Date().toISOString(),
   };
@@ -35,6 +36,7 @@ const updateNote = (req, res) => {
     return next(error);
   }
   note.lastModified = new Date().toISOString();
+  note.title = req.body.title;
   note.text = req.body.text;
   res.status(200).json(note);
 };
