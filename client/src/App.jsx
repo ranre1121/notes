@@ -57,51 +57,58 @@ const App = () => {
 
   return (
     <div
-      className="flex flex-col py-[50px] px-[100px] gap-5 h-screen z-10"
+      className="flex flex-col py-[50px] px-[100px] gap-5 h-screen z-10 mb-10"
       onClick={() => {
         showSorting && setShowSorting(false);
       }}
     >
-      <h1 className="text-4xl font-semibold bg-gradient-to-r  from-yellow-200 to-yellow-300 w-fit px-1">
-        Notes
-      </h1>
-
-      <div className="relative">
-        <Funnel
-          onClick={() => {
-            setShowSorting((prev) => !prev);
-          }}
-          className="cursor-pointer"
-        />
-        {showSorting && (
+      <div className="flex gap-3 items-center">
+        <h1 className="text-4xl font-semibold bg-gradient-to-r  from-yellow-200 to-yellow-300 w-fit px-1">
+          Notes
+        </h1>
+        <div className="relative w-full ">
           <div
-            className="absolute top-full left-0 mt-2 flex flex-col border border-gray-200 bg-white shadow-2xl py-2 rounded-md z-20"
-            onClick={(e) => e.stopPropagation()}
+            className={`${
+              showSorting && "bg-gray-100 border-gray-300"
+            } w-fit p-2 rounded-md`}
           >
-            {sortingOptions.map((option) => (
-              <label
-                key={option.value}
-                htmlFor={option.value}
-                className={`flex items-center gap-2 px-3 py-1 cursor-pointer hover:bg-blue-100 duration-200 ${
-                  selectedSortingOption === option.value
-                    ? "text-blue-700"
-                    : "text-black"
-                }`}
-              >
-                <input
-                  type="radio"
-                  id={option.value}
-                  name="sorting"
-                  value={option.value}
-                  checked={selectedSortingOption === option.value}
-                  onChange={(e) => setSelectedSortingOption(e.target.value)}
-                  className="hidden"
-                />
-                {option.label}
-              </label>
-            ))}
+            <Funnel
+              onClick={() => {
+                setShowSorting((prev) => !prev);
+              }}
+              className="cursor-pointer"
+            />
           </div>
-        )}
+          {showSorting && (
+            <div
+              className="absolute top-full left-0 mt-2 flex flex-col border border-gray-200 bg-white shadow-2xl py-2 rounded-md z-20"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {sortingOptions.map((option) => (
+                <label
+                  key={option.value}
+                  htmlFor={option.value}
+                  className={`flex items-center gap-2 px-3 py-1 cursor-pointer hover:bg-blue-100 duration-200 ${
+                    selectedSortingOption === option.value
+                      ? "text-blue-700"
+                      : "text-black"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    id={option.value}
+                    name="sorting"
+                    value={option.value}
+                    checked={selectedSortingOption === option.value}
+                    onChange={(e) => setSelectedSortingOption(e.target.value)}
+                    className="hidden"
+                  />
+                  {option.label}
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="flex gap-5 flex-wrap ">

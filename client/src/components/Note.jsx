@@ -3,17 +3,26 @@ import { Trash2 } from "lucide-react";
 import { Expand } from "lucide-react";
 import { motion } from "motion/react";
 import { Shrink } from "lucide-react";
+import { Pipette } from "lucide-react";
 
 {
   /** 
   TODO:
-  -filters
   -color modification
   -backend save
   -authorization
   
    */
 }
+
+const colors = {
+  "bg-yellow-500": "bg-yellow-100 text-yellow-800 border-yellow-500 border",
+  "bg-blue-500": "bg-blue-100 text-blue-800 border-blue-500 border",
+  "bg-green-500": "bg-green-100 text-green-800 border-green-500 border",
+  "bg-pink-500": "bg-pink-100 text-pink-800 border-pink-500 border",
+  "bg-purple-500": "bg-purple-100 text-purple-800 border-purple-500 border",
+  "bg-gray-500": "bg-gray-100 text-gray-800 border-gray-500",
+};
 
 const Note = ({ note, setNotes, focusLatest }) => {
   const textAreaRef = useRef(null);
@@ -121,13 +130,6 @@ const Note = ({ note, setNotes, focusLatest }) => {
     };
   }, []);
 
-  {
-    /** 
-      TODO
-      -color modification
-      */
-  }
-
   const cornerSetter = () => {
     if (distances.right < 330 && distances.bottom < 330) {
       return "right-0 bottom-0";
@@ -188,6 +190,14 @@ const Note = ({ note, setNotes, focusLatest }) => {
           />
         </div>
         <div className="absolute top-2 right-2 gap-1.5 flex items-center text-gray-400">
+          <div className="relative gap-3 flex flex-col items-center">
+            <Pipette className="size-4 hover:text-violet-500" />
+            <div className="flex absolute flex-col gap-1 top-full mt-2 outline-2 outline-gray-400 bg-white p-1 rounded-md">
+              {Object.keys(colors).map((color) => (
+                <div className={`w-3 h-3 rounded-full ${color}`}></div>
+              ))}
+            </div>
+          </div>
           {isExpanded ? (
             <Shrink
               onClick={handleShrink}

@@ -7,7 +7,7 @@ const noteColors = [
   "bg-green-100 text-green-800 border-green-500 border",
   "bg-pink-100 text-pink-800 border-pink-500 border",
   "bg-purple-100 text-purple-800 border-purple-500 border",
-  "bg-gray-100 text-gray-800 border-gray-500",
+  "bg-gray-100 text-gray-800 border-gray-500 border",
 ];
 
 const randomColor = () => {
