@@ -8,7 +8,7 @@ import { Pipette } from "lucide-react";
 {
   /** 
   TODO:
-  -color modification
+  -search
   -backend save
   -authorization
   

@@ -5,7 +5,6 @@ let notes = [];
 const getNotes = (req, res) => {
   const limit = parseInt(req.query.limit);
 
-  // newest first sort
   const sortedNotes = [...notes].sort(
     (a, b) => new Date(b.lastModified) - new Date(a.lastModified)
   );
@@ -42,11 +41,25 @@ const updateNote = (req, res, next) => {
     return next(error);
   }
 
-  if (req.body.title !== undefined) note.title = req.body.title;
-  if (req.body.text !== undefined) note.text = req.body.text;
-  if (req.body.color !== undefined) note.color = req.body.color;
+  let contentChanged = false;
 
-  note.lastModified = new Date().toISOString();
+  if (req.body.title !== undefined) {
+    note.title = req.body.title;
+    contentChanged = true;
+  }
+
+  if (req.body.text !== undefined) {
+    note.text = req.body.text;
+    contentChanged = true;
+  }
+
+  if (req.body.color !== undefined) {
+    note.color = req.body.color;
+  }
+
+  if (contentChanged) {
+    note.lastModified = new Date().toISOString();
+  }
 
   res.status(200).json(note);
 };
