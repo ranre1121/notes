@@ -192,10 +192,12 @@ const Note = ({ note, setNotes, focusLatest }) => {
         }}
         transition={{ duration: 0.5 }}
       >
-        <div className="w-full">
+        <div className={`w-full`}>
           <input
             type="text"
-            className="font-bold focus:outline-0"
+            className={`font-bold focus:outline-0 placeholder:${
+              noteColor.split(" ")[1]
+            }`}
             ref={titleRef}
             placeholder="Title"
             onChange={(e) => {
@@ -205,14 +207,17 @@ const Note = ({ note, setNotes, focusLatest }) => {
             }}
             value={titleContent}
           />
+
           <textarea
-            className="w-full h-full resize-none appearance-none cursor-pointer focus:outline-0"
+            className={`w-full h-full resize-none appearance-none cursor-pointer focus:outline-0 placeholder:${
+              noteColor.split(" ")[1]
+            }`}
             placeholder="Note"
             ref={textAreaRef}
             onChange={(e) => {
               const newText = e.target.value;
               setTextAreaContent(e.target.value);
-              handleChange({ newText: newText });
+              handleChange({ newText });
             }}
             value={textAreaContent}
           />
