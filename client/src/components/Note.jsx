@@ -18,25 +18,28 @@ import { Pipette } from "lucide-react";
 const colors = {
   "bg-yellow-100": [
     "bg-yellow-500",
-    "bg-yellow-100 text-yellow-800 border-yellow-500 border",
+    "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
   ],
   "bg-blue-100": [
     "bg-blue-500",
-    "bg-blue-100 text-blue-800 border-blue-500 border",
+    "bg-blue-100 text-blue-800 border-blue-500 border placeholder:text-blue-800",
   ],
   "bg-green-100": [
     "bg-green-500",
-    "bg-green-100 text-green-800 border-green-500 border",
+    "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
   ],
   "bg-pink-100": [
     "bg-pink-500",
-    "bg-pink-100 text-pink-800 border-pink-500 border",
+    "bg-pink-100 text-pink-800 border-pink-500 border placeholder:text-pink-800",
   ],
   "bg-purple-100": [
     "bg-purple-500",
-    "bg-purple-100 text-purple-800 border-purple-500 border",
+    "bg-purple-100 text-purple-800 border-purple-500 border placeholder:text-purple-800",
   ],
-  "bg-gray-100": ["bg-gray-500", "bg-gray-100 text-gray-800 border-gray-500"],
+  "bg-gray-100": [
+    "bg-gray-500",
+    "bg-gray-100 text-gray-800 border-gray-500 placeholder:text-gray-800",
+  ],
 };
 
 const Note = ({ note, setNotes, focusLatest }) => {
@@ -195,9 +198,7 @@ const Note = ({ note, setNotes, focusLatest }) => {
         <div className={`w-full`}>
           <input
             type="text"
-            className={`font-bold focus:outline-0 placeholder:${
-              noteColor.split(" ")[1]
-            }`}
+            className={`font-bold focus:outline-0 `}
             ref={titleRef}
             placeholder="Title"
             onChange={(e) => {
@@ -209,9 +210,7 @@ const Note = ({ note, setNotes, focusLatest }) => {
           />
 
           <textarea
-            className={`w-full h-full resize-none appearance-none cursor-pointer focus:outline-0 placeholder:${
-              noteColor.split(" ")[1]
-            }`}
+            className={`w-full h-full resize-none appearance-none cursor-pointer focus:outline-0 `}
             placeholder="Note"
             ref={textAreaRef}
             onChange={(e) => {
