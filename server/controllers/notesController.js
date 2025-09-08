@@ -31,9 +31,8 @@ const createNote = (req, res) => {
   res.status(201).json(note);
 };
 
-//change a note
-//PUT /api/notes/:id
-const updateNote = (req, res) => {
+// PUT /api/notes/:id
+const updateNote = (req, res, next) => {
   const id = parseInt(req.params.id);
   const note = notes.find((note) => note.id === id);
 
@@ -42,9 +41,13 @@ const updateNote = (req, res) => {
     error.status = 404;
     return next(error);
   }
+
+  if (req.body.title !== undefined) note.title = req.body.title;
+  if (req.body.text !== undefined) note.text = req.body.text;
+  if (req.body.color !== undefined) note.color = req.body.color;
+
   note.lastModified = new Date().toISOString();
-  note.title = req.body.title;
-  note.text = req.body.text;
+
   res.status(200).json(note);
 };
 
