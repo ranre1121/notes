@@ -15,7 +15,7 @@ export default function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <Router>
@@ -33,7 +33,13 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route
           path="/notes"
-          element={isLoggedIn ? <Notes /> : <Navigate to="/login" />}
+          element={
+            isLoggedIn ? (
+              <Notes setIsLoggedIn={setIsLoggedIn} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
       </Routes>
     </Router>

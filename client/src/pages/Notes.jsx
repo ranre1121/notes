@@ -18,7 +18,7 @@ const sortingOptions = [
   },
 ];
 
-const App = () => {
+const Notes = ({ setIsLoggedIn }) => {
   const [notes, setNotes] = useState([]);
   const [focusLatest, setFocusLatest] = useState(false);
   const [showSorting, setShowSorting] = useState(false);
@@ -26,7 +26,7 @@ const App = () => {
 
   const fetchNotes = async () => {
     try {
-      const res = await fetch("http://localhost:8000/api/notes");
+      const res = await fetch("http://localhost:8080/api/notes");
       const json = await res.json();
       setNotes(json);
     } catch (error) {
@@ -56,11 +56,21 @@ const App = () => {
 
   return (
     <div
-      className="flex flex-col py-[50px] px-[100px] gap-5 h-screen z-10 mb-10"
+      className="flex flex-col pb-[50px] px-[100px] gap-5 h-screen z-10 mb-10"
       onClick={() => {
         showSorting && setShowSorting(false);
       }}
     >
+      <div>
+        <button
+          className="text-lg bg-red-500 text-white px-2 rounded-md"
+          onClick={() => {
+            setIsLoggedIn(false);
+          }}
+        >
+          Log out
+        </button>
+      </div>
       <div className="flex gap-3 items-center">
         <h1 className="text-4xl font-semibold bg-gradient-to-r  from-yellow-200 to-yellow-300 w-fit px-1">
           Notes
@@ -78,6 +88,7 @@ const App = () => {
               className="cursor-pointer"
             />
           </div>
+
           {showSorting && (
             <div
               className="absolute top-full left-0 mt-2 flex flex-col border border-gray-200 bg-white shadow-2xl py-2 rounded-md z-20"
@@ -133,4 +144,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Notes;

@@ -108,7 +108,7 @@ const Note = ({ note, setNotes, focusLatest }) => {
       if (newText !== undefined) updateData.text = newText;
       if (newColor !== undefined) updateData.color = newColor;
 
-      const res = await fetch(`http://localhost:8000/api/notes/${note.id}`, {
+      const res = await fetch(`http://localhost:8080/api/notes/${note.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateData),
@@ -128,7 +128,7 @@ const Note = ({ note, setNotes, focusLatest }) => {
   //DELETE
   const handleDelete = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/api/notes/${note.id}`, {
+      const res = await fetch(`http://localhost:8080/api/notes/${note.id}`, {
         method: "DELETE",
       });
 

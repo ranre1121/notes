@@ -9,7 +9,7 @@ export const registerUser = async (req, res) => {
   const { username, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
   users.push({ username, password: hashedPassword });
-  res.json({ message: "User registered successfully" });
+  res.json({ message: `User registered successfully` });
 };
 
 // Login

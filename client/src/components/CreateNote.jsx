@@ -17,7 +17,7 @@ const randomColor = () => {
 const CreateNote = ({ setNotes, setFocusLatest }) => {
   async function handleClick() {
     try {
-      const res = await fetch("http://localhost:8000/api/notes", {
+      const res = await fetch("http://localhost:8080/api/notes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ color: randomColor() }),

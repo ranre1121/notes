@@ -4,7 +4,7 @@ import logger from "./middleware/logger.js";
 import notes from "./routes/authNotes.js";
 import auth from "./routes/authRoutes.js";
 
-const port = process.env.PORT || 8000;
+const port = 8080;
 
 const app = express();
 
