@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
 import logger from "./middleware/logger.js";
-import notes from "./routes/notes.js";
+import notes from "./routes/authNotes.js";
+import auth from "./routes/authRoutes.js";
+
 const port = process.env.PORT || 8000;
 
 const app = express();
@@ -18,9 +20,7 @@ app.use(logger);
 //notes route
 app.use("/api/notes", notes);
 
-//test
-app.get("/api/hello", (req, res) => {
-  res.json({ message: "Hello from Express backend!" });
-});
+//auth route
+app.use("/api/auth", auth);
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
