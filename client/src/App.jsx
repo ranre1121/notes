@@ -11,11 +11,17 @@ import Register from "./pages/Register";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
-  }, [isLoggedIn]);
+    setLoading(false);
+  }, []);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <Router>
