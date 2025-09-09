@@ -41,3 +41,10 @@ export const getProtected = (req, res) => {
 export const getUsers = (req, res) => {
   res.json({ users: users });
 };
+
+export const authVerify = (req, res) => {
+  res.json({
+    valid: true,
+    username: req.user.username,
+  });
+};
