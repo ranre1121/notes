@@ -1,124 +1,182 @@
 [
   {
-    "username": "a",
-    "password": "$2b$10$Mr31GFUec7RgNGc159WDfOYCtPaXzLQThAQ186lZXzLVtLOXV8dXK",
+    "username": "yernar",
+    "password": "$2b$10$CJOoLjdZGv/4k2bnJAtzJeimizFIZfiXw/3FjaPwMt.NEqr.qfeZW",
     "notes": [
       {
         "id": 1,
-        "text": "",
-        "title": "",
+        "text": "Hello, world",
+        "title": "First normal user Note",
         "color": "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
-        "lastModified": "2025-09-09T12:14:54.011Z"
+        "lastModified": "2025-09-09T13:40:46.098Z"
       },
       {
         "id": 2,
-        "text": "",
-        "title": "",
-        "color": "bg-gray-100 text-gray-800 border-gray-500 border placeholder:text-gray-800",
-        "lastModified": "2025-09-09T12:14:54.433Z"
-      },
-      {
-        "id": 3,
-        "text": "",
-        "title": "",
-        "color": "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
-        "lastModified": "2025-09-09T12:14:56.324Z"
-      },
-      {
-        "id": 4,
-        "text": "",
-        "title": "",
-        "color": "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
-        "lastModified": "2025-09-09T12:14:56.625Z"
-      },
-      {
-        "id": 5,
-        "text": "This is my note",
-        "title": "Hello",
-        "color": "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
-        "lastModified": "2025-09-09T12:15:48.434Z"
-      }
-    ]
-  },
-  {
-    "username": "b",
-    "password": "$2b$10$wogMyYnhRq02V002BL5XzOkUHgu3o0P84FuJxp7KARE144aNZjhha",
-    "notes": [
-      {
-        "id": 1,
         "text": "",
         "title": "",
         "color": "bg-blue-100 text-blue-800 border-blue-500 border placeholder:text-blue-800",
-        "lastModified": "2025-09-09T12:15:08.034Z"
-      },
-      {
-        "id": 2,
-        "text": "",
-        "title": "",
-        "color": "bg-gray-100 text-gray-800 border-gray-500 border placeholder:text-gray-800",
-        "lastModified": "2025-09-09T12:15:08.345Z"
+        "lastModified": "2025-09-09T13:40:32.551Z"
       },
       {
         "id": 3,
         "text": "",
         "title": "",
         "color": "bg-pink-100 text-pink-800 border-pink-500 border placeholder:text-pink-800",
-        "lastModified": "2025-09-09T12:15:08.636Z"
+        "lastModified": "2025-09-09T13:40:32.974Z"
       },
       {
         "id": 4,
         "text": "",
         "title": "",
-        "color": "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
-        "lastModified": "2025-09-09T12:15:09.077Z"
+        "color": "bg-purple-100 text-purple-800 border-purple-500 border placeholder:text-purple-800",
+        "lastModified": "2025-09-09T13:40:33.273Z"
       },
       {
         "id": 5,
         "text": "",
         "title": "",
-        "color": "bg-blue-100 text-blue-800 border-blue-500 border placeholder:text-blue-800",
-        "lastModified": "2025-09-09T12:15:09.389Z"
+        "color": "bg-purple-100 text-purple-800 border-purple-500 border placeholder:text-purple-800",
+        "lastModified": "2025-09-09T13:40:33.759Z"
       },
       {
         "id": 6,
         "text": "",
         "title": "",
-        "color": "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
-        "lastModified": "2025-09-09T12:15:09.999Z"
+        "color": "bg-pink-100 text-pink-800 border-pink-500 border placeholder:text-pink-800",
+        "lastModified": "2025-09-09T13:40:52.015Z"
       },
       {
         "id": 7,
         "text": "",
         "title": "",
         "color": "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
-        "lastModified": "2025-09-09T12:15:10.266Z"
+        "lastModified": "2025-09-09T13:40:58.108Z"
       },
       {
         "id": 8,
         "text": "",
         "title": "",
-        "color": "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
-        "lastModified": "2025-09-09T12:15:10.676Z"
+        "color": "bg-pink-100 text-pink-800 border-pink-500 border placeholder:text-pink-800",
+        "lastModified": "2025-09-09T13:45:56.425Z"
       },
       {
         "id": 9,
         "text": "",
         "title": "",
+        "color": "bg-purple-100 text-purple-800 border-purple-500 border placeholder:text-purple-800",
+        "lastModified": "2025-09-09T13:45:56.741Z"
+      }
+    ]
+  },
+  {
+    "username": "test123",
+    "password": "$2b$10$G1qjwZsNoi8DQmd09FNlaulMhpnC7pStjtzXaX2h4LHRDQ.2tw9jG",
+    "notes": [
+      {
+        "id": 1,
+        "text": "",
+        "title": "",
         "color": "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
-        "lastModified": "2025-09-09T12:15:10.949Z"
+        "lastModified": "2025-09-09T13:46:29.579Z"
+      },
+      {
+        "id": 2,
+        "text": "",
+        "title": "",
+        "color": "bg-blue-100 text-blue-800 border-blue-500 border placeholder:text-blue-800",
+        "lastModified": "2025-09-09T13:46:29.835Z"
+      },
+      {
+        "id": 3,
+        "text": "",
+        "title": "",
+        "color": "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
+        "lastModified": "2025-09-09T13:46:30.328Z"
+      },
+      {
+        "id": 4,
+        "text": "",
+        "title": "",
+        "color": "bg-gray-100 text-gray-800 border-gray-500 border placeholder:text-gray-800",
+        "lastModified": "2025-09-09T13:46:30.577Z"
+      },
+      {
+        "id": 5,
+        "text": "",
+        "title": "",
+        "color": "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
+        "lastModified": "2025-09-09T13:46:31.058Z"
+      },
+      {
+        "id": 6,
+        "text": "",
+        "title": "",
+        "color": "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
+        "lastModified": "2025-09-09T13:46:31.622Z"
+      },
+      {
+        "id": 7,
+        "text": "",
+        "title": "",
+        "color": "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
+        "lastModified": "2025-09-09T13:46:31.842Z"
+      },
+      {
+        "id": 8,
+        "text": "",
+        "title": "",
+        "color": "bg-gray-100 text-gray-800 border-gray-500 border placeholder:text-gray-800",
+        "lastModified": "2025-09-09T13:46:32.079Z"
+      },
+      {
+        "id": 9,
+        "text": "",
+        "title": "",
+        "color": "bg-blue-100 text-blue-800 border-blue-500 border placeholder:text-blue-800",
+        "lastModified": "2025-09-09T13:46:32.308Z"
       },
       {
         "id": 10,
         "text": "",
         "title": "",
+        "color": "bg-blue-100 text-blue-800 border-blue-500 border placeholder:text-blue-800",
+        "lastModified": "2025-09-09T13:46:32.796Z"
+      },
+      {
+        "id": 11,
+        "text": "",
+        "title": "",
+        "color": "bg-pink-100 text-pink-800 border-pink-500 border placeholder:text-pink-800",
+        "lastModified": "2025-09-09T13:46:33.826Z"
+      },
+      {
+        "id": 12,
+        "text": "",
+        "title": "",
+        "color": "bg-pink-100 text-pink-800 border-pink-500 border placeholder:text-pink-800",
+        "lastModified": "2025-09-09T13:46:34.051Z"
+      },
+      {
+        "id": 13,
+        "text": "",
+        "title": "",
+        "color": "bg-pink-100 text-pink-800 border-pink-500 border placeholder:text-pink-800",
+        "lastModified": "2025-09-09T13:46:34.588Z"
+      },
+      {
+        "id": 14,
+        "text": "",
+        "title": "",
         "color": "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
-        "lastModified": "2025-09-09T12:15:11.408Z"
+        "lastModified": "2025-09-09T13:46:34.824Z"
+      },
+      {
+        "id": 15,
+        "text": "",
+        "title": "",
+        "color": "bg-gray-100 text-gray-800 border-gray-500 border placeholder:text-gray-800",
+        "lastModified": "2025-09-09T13:46:35.141Z"
       }
     ]
-  },
-  {
-    "username": "c",
-    "password": "$2b$10$GfNUMBXqe3dyj4ShKWtzYujQJ45nvXjmslKZ.9Oi7/W2mDYxrRf8C",
-    "notes": []
   }
 ]

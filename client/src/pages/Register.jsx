@@ -9,27 +9,45 @@ const Register = () => {
   const [password2, setPassword2] = useState("");
 
   const handleRegister = async () => {
-    if (password === password2) {
-      try {
-        const res = await fetch("http://localhost:8080/api/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password }),
-        });
+    const usernameRegex = /^[a-zA-Z0-9_]{3,16}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
 
-        const data = await res.json();
+    if (!usernameRegex.test(username)) {
+      alert(
+        "Username must be 3-16 characters and can only contain letters, numbers, and underscores."
+      );
+      return;
+    }
 
-        if (res.ok) {
-          navigate("/login");
-        } else {
-          alert(data.message || "Registration failed");
-        }
-      } catch (error) {
-        console.log(error);
-        alert("Something went wrong");
-      }
-    } else {
+    if (!passwordRegex.test(password)) {
+      alert(
+        "Password must be at least 6 characters, contain at least one letter and one number."
+      );
+      return;
+    }
+
+    if (password !== password2) {
       alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:8080/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        navigate("/login");
+      } else {
+        alert(data.message || "Registration failed");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong");
     }
   };
 

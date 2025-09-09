@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import CreateNote from "../components/CreateNote";
 import Note from "../components/Note";
 import { Funnel } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 const sortingOptions = [
   {
@@ -19,6 +20,7 @@ const sortingOptions = [
 ];
 
 const Notes = ({ setIsLoggedIn }) => {
+  const [username, setUsername] = useState("");
   const [notes, setNotes] = useState([]);
   const [focusLatest, setFocusLatest] = useState(false);
   const [showSorting, setShowSorting] = useState(false);
@@ -34,7 +36,8 @@ const Notes = ({ setIsLoggedIn }) => {
         },
       });
       const json = await res.json();
-      setNotes(json);
+      setNotes(json.notes);
+      setUsername(json.username);
     } catch (error) {
       console.log(error);
     }
@@ -62,21 +65,20 @@ const Notes = ({ setIsLoggedIn }) => {
 
   return (
     <div
-      className="flex flex-col pb-[50px] px-[100px] gap-5 h-screen z-10 mb-10"
+      className="flex flex-col pb-[50px] py-10 px-[100px] gap-5 h-screen z-10 mb-10"
       onClick={() => {
         showSorting && setShowSorting(false);
       }}
     >
-      <div>
-        <button
-          className="text-lg bg-red-500 text-white px-2 rounded-md"
+      <div className="flex gap-5 text-2xl items-center">
+        <p>Hello, {username}! </p>
+        <LogOut
           onClick={() => {
             localStorage.removeItem("token");
             setIsLoggedIn(false);
           }}
-        >
-          Log out
-        </button>
+          className="hover:text-red-500 cursor-pointer"
+        />
       </div>
       <div className="flex gap-3 items-center">
         <h1 className="text-4xl font-semibold bg-gradient-to-r  from-yellow-200 to-yellow-300 w-fit px-1">

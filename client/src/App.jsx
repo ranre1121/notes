@@ -67,7 +67,11 @@ export default function App() {
         <Route
           path="/notes"
           element={
-            isLoggedIn ? <Notes setIsLoggedIn={setIsLoggedIn} /> : <Login />
+            isLoggedIn ? (
+              <Notes setIsLoggedIn={setIsLoggedIn} />
+            ) : (
+              <Login setIsLoggedIn={setIsLoggedIn} />
+            )
           }
         />
       </Routes>

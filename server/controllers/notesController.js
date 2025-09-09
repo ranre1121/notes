@@ -36,7 +36,10 @@ const getNotes = (req, res) => {
     return res.status(200).json(sortedNotes.slice(0, limit));
   }
 
-  res.json(sortedNotes);
+  res.json({
+    notes: sortedNotes,
+    username: user.username,
+  });
 };
 
 // POST /api/notes
