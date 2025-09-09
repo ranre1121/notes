@@ -16,13 +16,17 @@ const Register = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password }),
         });
+
         const data = await res.json();
-        if (data) {
+
+        if (res.ok) {
           navigate("/login");
+        } else {
+          alert(data.message || "Registration failed");
         }
-        alert(`${username} ${password}` || "Registration failed");
       } catch (error) {
         console.log(error);
+        alert("Something went wrong");
       }
     } else {
       alert("Passwords do not match");

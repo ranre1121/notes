@@ -71,6 +71,7 @@ const Notes = ({ setIsLoggedIn }) => {
         <button
           className="text-lg bg-red-500 text-white px-2 rounded-md"
           onClick={() => {
+            localStorage.removeItem("token");
             setIsLoggedIn(false);
           }}
         >

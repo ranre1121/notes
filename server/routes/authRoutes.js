@@ -12,6 +12,6 @@ const router = Router();
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/users", getUsers);
-router.get("verify", protect, authVerify);
+router.get("/verify", protect, authVerify);
 
 export default router;

@@ -43,11 +43,11 @@ export const loginUser = (req, res) => {
   const users = loadUsers();
 
   const user = users.find((u) => u.username === username);
-  if (!user) return res.status(400).json({ message: "Invalid credentials" });
+  if (!user) return res.status(400).json({ message: "Invalid username" });
 
   const validPassword = bcrypt.compareSync(password, user.password);
   if (!validPassword)
-    return res.status(400).json({ message: "Invalid credentials" });
+    return res.status(400).json({ message: "Invalid password" });
 
   const token = jwt.sign(
     { username: user.username },
@@ -65,7 +65,7 @@ export const getProtected = (req, res) => {
 
 export const getUsers = (req, res) => {
   const users = loadUsers();
-  res.json(users.map((u) => ({ username: u.username }))); // don’t expose passwords!
+  res.json(users.map((u) => ({ username: u.username })));
 };
 
 export const authVerify = (req, res) => {

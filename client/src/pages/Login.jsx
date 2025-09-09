@@ -19,7 +19,7 @@ const Login = ({ setIsLoggedIn, setUser }) => {
     if (data.token) {
       localStorage.setItem("token", data.token);
       setIsLoggedIn(true);
-      alert("Login successful!");
+
       navigate("/notes");
     } else {
       alert(data.message || "Login failed");
