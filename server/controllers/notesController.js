@@ -1,7 +1,25 @@
-import { users } from "../data/users.js"; // wherever your users array is stored
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const usersFile = path.join(__dirname, "../data/users.json");
+
+function loadUsers() {
+  if (!fs.existsSync(usersFile)) return [];
+  const data = fs.readFileSync(usersFile, "utf-8");
+  return JSON.parse(data);
+}
+
+function saveUsers(users) {
+  fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
+}
 
 // GET /api/notes
 const getNotes = (req, res) => {
+  const users = loadUsers();
   const user = users.find((u) => u.username === req.user.username);
 
   if (!user) {
@@ -23,6 +41,7 @@ const getNotes = (req, res) => {
 
 // POST /api/notes
 const createNote = (req, res) => {
+  const users = loadUsers();
   const user = users.find((u) => u.username === req.user.username);
 
   if (!user) {
@@ -38,11 +57,14 @@ const createNote = (req, res) => {
   };
 
   user.notes.push(note);
+  saveUsers(users); // persist changes
+
   res.status(201).json(note);
 };
 
 // PUT /api/notes/:id
 const updateNote = (req, res) => {
+  const users = loadUsers();
   const user = users.find((u) => u.username === req.user.username);
 
   if (!user) {
@@ -76,11 +98,14 @@ const updateNote = (req, res) => {
     note.lastModified = new Date().toISOString();
   }
 
+  saveUsers(users); // persist update
+
   res.status(200).json(note);
 };
 
 // DELETE /api/notes/:id
 const deleteNote = (req, res) => {
+  const users = loadUsers();
   const user = users.find((u) => u.username === req.user.username);
 
   if (!user) {
@@ -95,6 +120,8 @@ const deleteNote = (req, res) => {
   }
 
   user.notes = user.notes.filter((n) => n.id !== id);
+
+  saveUsers(users); // persist delete
 
   res.status(202).json(note);
 };

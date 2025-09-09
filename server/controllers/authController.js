@@ -1,35 +1,60 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { users } from "../data/users.js";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
 
-const SECRET_KEY = "your_secret_key"; // later: process.env.JWT_SECRET
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const usersFile = path.join(__dirname, "../data/users.json");
+
+function loadUsers() {
+  if (!fs.existsSync(usersFile)) return [];
+  const data = fs.readFileSync(usersFile, "utf-8");
+  return JSON.parse(data);
+}
+
+function saveUsers(users) {
+  fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
+}
 
 // Register
-export const registerUser = async (req, res) => {
+export const registerUser = (req, res) => {
   const { username, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const users = loadUsers();
 
-  const newUser = {
-    username,
-    password: hashedPassword,
-    notes: [],
-  };
+  if (users.find((u) => u.username === username)) {
+    return res.status(400).json({ message: "User already exists" });
+  }
+
+  const hashedPassword = bcrypt.hashSync(password, 10);
+  const newUser = { username, password: hashedPassword, notes: [] };
+
   users.push(newUser);
-  res.json({ message: "User registered successfully" });
+  saveUsers(users);
+
+  res.status(201).json({ message: "User registered" });
 };
 
 // Login
-export const loginUser = async (req, res) => {
+export const loginUser = (req, res) => {
   const { username, password } = req.body;
+  const users = loadUsers();
+
   const user = users.find((u) => u.username === username);
-  if (!user) return res.status(400).json({ message: "User not found" });
+  if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
-  const isValid = await bcrypt.compare(password, user.password);
-  if (!isValid) return res.status(400).json({ message: "Invalid password" });
+  const validPassword = bcrypt.compareSync(password, user.password);
+  if (!validPassword)
+    return res.status(400).json({ message: "Invalid credentials" });
 
-  const token = jwt.sign({ username: user.username }, SECRET_KEY, {
-    expiresIn: "1h",
-  });
+  const token = jwt.sign(
+    { username: user.username },
+    process.env.JWT_SECRET || "your_secret_key",
+    { expiresIn: "1h" }
+  );
+
   res.json({ token });
 };
 
@@ -39,7 +64,8 @@ export const getProtected = (req, res) => {
 };
 
 export const getUsers = (req, res) => {
-  res.json({ users: users });
+  const users = loadUsers();
+  res.json(users.map((u) => ({ username: u.username }))); // don’t expose passwords!
 };
 
 export const authVerify = (req, res) => {

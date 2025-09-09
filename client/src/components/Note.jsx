@@ -10,8 +10,6 @@ import { Pipette } from "lucide-react";
   TODO:
   -search
   -backend save
-  -authorization
-  
    */
 }
 

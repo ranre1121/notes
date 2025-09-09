@@ -2,7 +2,6 @@ import { Router } from "express";
 import {
   registerUser,
   loginUser,
-  getProtected,
   getUsers,
   authVerify,
 } from "../controllers/authController.js";

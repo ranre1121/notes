@@ -1,0 +1,119 @@
+[
+  {
+    "username": "a",
+    "password": "$2b$10$Mr31GFUec7RgNGc159WDfOYCtPaXzLQThAQ186lZXzLVtLOXV8dXK",
+    "notes": [
+      {
+        "id": 1,
+        "text": "",
+        "title": "",
+        "color": "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
+        "lastModified": "2025-09-09T12:14:54.011Z"
+      },
+      {
+        "id": 2,
+        "text": "",
+        "title": "",
+        "color": "bg-gray-100 text-gray-800 border-gray-500 border placeholder:text-gray-800",
+        "lastModified": "2025-09-09T12:14:54.433Z"
+      },
+      {
+        "id": 3,
+        "text": "",
+        "title": "",
+        "color": "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
+        "lastModified": "2025-09-09T12:14:56.324Z"
+      },
+      {
+        "id": 4,
+        "text": "",
+        "title": "",
+        "color": "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
+        "lastModified": "2025-09-09T12:14:56.625Z"
+      },
+      {
+        "id": 5,
+        "text": "This is my note",
+        "title": "Hello",
+        "color": "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
+        "lastModified": "2025-09-09T12:15:48.434Z"
+      }
+    ]
+  },
+  {
+    "username": "b",
+    "password": "$2b$10$wogMyYnhRq02V002BL5XzOkUHgu3o0P84FuJxp7KARE144aNZjhha",
+    "notes": [
+      {
+        "id": 1,
+        "text": "",
+        "title": "",
+        "color": "bg-blue-100 text-blue-800 border-blue-500 border placeholder:text-blue-800",
+        "lastModified": "2025-09-09T12:15:08.034Z"
+      },
+      {
+        "id": 2,
+        "text": "",
+        "title": "",
+        "color": "bg-gray-100 text-gray-800 border-gray-500 border placeholder:text-gray-800",
+        "lastModified": "2025-09-09T12:15:08.345Z"
+      },
+      {
+        "id": 3,
+        "text": "",
+        "title": "",
+        "color": "bg-pink-100 text-pink-800 border-pink-500 border placeholder:text-pink-800",
+        "lastModified": "2025-09-09T12:15:08.636Z"
+      },
+      {
+        "id": 4,
+        "text": "",
+        "title": "",
+        "color": "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
+        "lastModified": "2025-09-09T12:15:09.077Z"
+      },
+      {
+        "id": 5,
+        "text": "",
+        "title": "",
+        "color": "bg-blue-100 text-blue-800 border-blue-500 border placeholder:text-blue-800",
+        "lastModified": "2025-09-09T12:15:09.389Z"
+      },
+      {
+        "id": 6,
+        "text": "",
+        "title": "",
+        "color": "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
+        "lastModified": "2025-09-09T12:15:09.999Z"
+      },
+      {
+        "id": 7,
+        "text": "",
+        "title": "",
+        "color": "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
+        "lastModified": "2025-09-09T12:15:10.266Z"
+      },
+      {
+        "id": 8,
+        "text": "",
+        "title": "",
+        "color": "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
+        "lastModified": "2025-09-09T12:15:10.676Z"
+      },
+      {
+        "id": 9,
+        "text": "",
+        "title": "",
+        "color": "bg-yellow-100 text-yellow-800 border-yellow-500 border placeholder:text-yellow-800",
+        "lastModified": "2025-09-09T12:15:10.949Z"
+      },
+      {
+        "id": 10,
+        "text": "",
+        "title": "",
+        "color": "bg-green-100 text-green-800 border-green-500 border placeholder:text-green-800",
+        "lastModified": "2025-09-09T12:15:11.408Z"
+      }
+    ]
+  }
+]
