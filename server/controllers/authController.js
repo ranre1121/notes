@@ -1,15 +1,21 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { users } from "../data/users.js";
 
 const SECRET_KEY = "your_secret_key"; // later: process.env.JWT_SECRET
-let users = []; // in-memory user store
 
 // Register
 export const registerUser = async (req, res) => {
   const { username, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
-  users.push({ username, password: hashedPassword });
-  res.json({ message: `User registered successfully` });
+
+  const newUser = {
+    username,
+    password: hashedPassword,
+    notes: [],
+  };
+  users.push(newUser);
+  res.json({ message: "User registered successfully" });
 };
 
 // Login

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import logger from "./middleware/logger.js";
-import notes from "./routes/authNotes.js";
+import notes from "./routes/notesRoutes.js";
 import auth from "./routes/authRoutes.js";
 
 const port = 8080;

@@ -26,7 +26,13 @@ const Notes = ({ setIsLoggedIn }) => {
 
   const fetchNotes = async () => {
     try {
-      const res = await fetch("http://localhost:8080/api/notes");
+      const token = localStorage.getItem("token");
+      const res = await fetch("http://localhost:8080/api/notes", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const json = await res.json();
       setNotes(json);
     } catch (error) {

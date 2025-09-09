@@ -103,6 +103,7 @@ const Note = ({ note, setNotes, focusLatest }) => {
   //PUT
   const handleChange = async ({ newTitle, newText, newColor }) => {
     try {
+      const token = localStorage.getItem("token");
       const updateData = {};
       if (newTitle !== undefined) updateData.title = newTitle;
       if (newText !== undefined) updateData.text = newText;
@@ -110,7 +111,10 @@ const Note = ({ note, setNotes, focusLatest }) => {
 
       const res = await fetch(`http://localhost:8080/api/notes/${note.id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(updateData),
       });
 
@@ -127,9 +131,14 @@ const Note = ({ note, setNotes, focusLatest }) => {
 
   //DELETE
   const handleDelete = async () => {
+    const token = localStorage.getItem("token");
     try {
       const res = await fetch(`http://localhost:8080/api/notes/${note.id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (!res.ok) {
