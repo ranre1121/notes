@@ -65,12 +65,12 @@ const Notes = ({ setIsLoggedIn }) => {
 
   return (
     <div
-      className="flex flex-col pb-[50px] py-10 px-[100px] gap-5 h-screen z-10 mb-10"
+      className="flex flex-col pb-[50px] pt-5 px-[100px] gap-5 h-screen z-10 "
       onClick={() => {
         showSorting && setShowSorting(false);
       }}
     >
-      <div className="flex gap-5 text-2xl items-center">
+      <div className="flex gap-5 text-xl items-center">
         <p>Hello, {username}! </p>
         <LogOut
           onClick={() => {
